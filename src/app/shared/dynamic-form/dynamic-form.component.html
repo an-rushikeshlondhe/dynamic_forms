@@ -1,0 +1,19 @@
+<div [formGroup]="form">
+  <div *ngFor="let formGroupD of formGroups">
+    <label [attr.for]="formGroupD.key">{{formGroupD.label}} <span *ngIf="formGroupD?.required" style="color: red;">*</span></label>
+
+  <div [ngSwitch]="formGroupD.controlType">
+
+    <input *ngSwitchCase="'textbox'" [formControlName]="formGroupD.key"
+            [id]="formGroupD.key" [type]="formGroupD.type">
+
+    <select [id]="formGroupD.key" *ngSwitchCase="'dropdown'" [formControlName]="formGroupD.key">
+      <option *ngFor="let opt of formGroupD.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+
+  </div>
+  </div>
+
+  <button style="margin-top: 15px" (click)="submitFormValues()">Submit</button>
+</div>
+
